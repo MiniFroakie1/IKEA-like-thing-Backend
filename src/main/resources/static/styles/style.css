@@ -1,0 +1,21 @@
+body {
+    background: #313131;
+    color: white;
+    font-size: 20px;
+}
+
+td, th, table {
+    border: 2px solid #8f8f8f;
+    border-collapse: collapse;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+a {
+    color: #5fcaff;
+    text-decoration: none;
+}
