@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Management System</title>
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+</head>
+<body>
+    <div class="center">
+        <div>
+            <h1>Customer thingy</h1>
+            <hr>
+            <h2>Save Customer</h2>
+
+            <form action="#" th:action="@{/customers/save}" th:object="${customer}" method="post">
+                <input type="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}" th:field="*{email}" placeholder="Customer Email">
+                <input type="number" step="0.01" min="0" max="100" th:field="*{rebate}" placeholder="Customer Rebate Percentage">
+                <button type="submit">Save Customer</button>
+            </form>
+            <hr>
+            <a th:href="@{/customers}">Back to Customer List</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -12,15 +12,20 @@
             <a th:href="@{/products/addnew}">Add Product</a>
             <table>
                 <tr>
+                    <th>Id</th>
                     <th>Name</th>
                     <th>Price</th>
                     <th>Action</th>
                 </tr>
                 <tbody>
                 <tr th:each="products:${allproductslist}">
+                    <td th:text="${products.id}"></td>
                     <td th:text="${products.name}"></td>
                     <td th:text="${products.price} + ' kr'">kr</td>
-                    <td> <a th:href="@{/show}" </td>
+                    <td>
+                        <a th:href="@{/products/update/{id}(id=${products.id})}" class="btn btn-primary">Update</a>
+                        <a th:href="@{/products/delete/{id}(id=${products.id})}" class="btn btn-danger">Delete</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>

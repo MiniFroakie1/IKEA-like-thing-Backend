@@ -7,6 +7,8 @@ body {
 td, th, table {
     border: 2px solid #8f8f8f;
     border-collapse: collapse;
+    text-align: start;
+    padding: 6px;
 }
 
 .center {
@@ -18,4 +20,18 @@ td, th, table {
 a {
     color: #5fcaff;
     text-decoration: none;
+}
+
+.btn {
+    border-radius: 5px;
+    color: white;
+    padding: 2px 7px;
+}
+
+.btn-primary {
+    background-color: #008cff;
+}
+
+.btn-danger {
+    background-color: #ff2626;
 }

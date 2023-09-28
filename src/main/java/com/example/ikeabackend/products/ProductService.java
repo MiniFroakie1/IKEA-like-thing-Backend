@@ -1,8 +1,7 @@
-package com.example.ikeabackend.services;
+package com.example.ikeabackend.products;
 
-import com.example.ikeabackend.models.Product;
-import com.example.ikeabackend.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,12 +12,12 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public Product createProduct(Product product) {
-        return productRepository.save(product);
+    public void createProduct(Product product) {
+        productRepository.save(product);
     }
 
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
+        return productRepository.findAll(Sort.by(Sort.Direction.ASC, "Id"));
     }
 
     public Optional<Product> getProductById(Long id) {
@@ -34,10 +33,6 @@ public class ProductService {
             return productRepository.save(existingProduct);
         }
         return null;
-    }
-
-    public void deleteAllProducts() {
-        productRepository.deleteAll();
     }
 
     public void deleteProduct(Long id) {

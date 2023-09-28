@@ -1,4 +1,4 @@
-package com.example.ikeabackend.models;
+package com.example.ikeabackend.products;
 
 import jakarta.persistence.*;
 

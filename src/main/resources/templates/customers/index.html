@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customers</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet">
+</head>
+<body>
+    <div class="center">
+        <div>
+            <h3>Customer List</h3>
+            <a th:href="@{/customers/addnew}">Add customer</a>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Email</th>
+                    <th>Rebate</th>
+                    <th>Action</th>
+                </tr>
+                <tbody>
+                <tr th:each="customer:${allcustomerslist}">
+                    <td th:text="${customer.id}"></td>
+                    <td th:text="${customer.email}"></td>
+                    <td th:text="${customer.rebate} + ' %'"></td>
+                    <td>
+                        <a th:href="@{/customers/update/{id}(id=${customer.id})}" class="btn btn-primary">Update</a>
+                        <a th:href="@{/customers/delete/{id}(id=${customer.id})}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

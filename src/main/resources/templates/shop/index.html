@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>IKEA</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet">
+</head>
+<body>
+    <div class="center">
+        <div>
+            <h3>Price Calculator</h3>
+            <div style="border: white 1px solid">
+                <label>
+                    <select onchange="window.location.href='shop/' + this.value">
+                        <option>Select a Customer</option>
+                        <option th:each="customer:${allcustomerslist}" th:value="*{customer.id}" th:text="*{customer.email}"></option>
+                    </select>
+                </label>
+                <div>
+                    <div>
+                        <table>
+                            <tr>
+                                <th>Name</th>
+                                <th>Amount</th>
+                                <th>Price</th>
+                                <th>Action</th>
+                            </tr>
+                            <tbody>
+                            <tr th:each="products:${allproductslist}">
+                                <td th:text="${products.name}"></td>
+                                <td th:text="${cart.get(products.id)}"></td>
+                                <td th:text="${products.price * cart.get(products.id)} + ' kr'"></td>
+                                <td>
+                                    <form action="#" th:action="@{/shop/addtocart}" th:object="${product}" method="post">
+                                        <input type="hidden" name="id" th:value="${products.id}">
+                                        <button type="submit">Add to Cart</button>
+                                    </form>
+                                    <form action="#" th:action="@{/shop/removefromcart}" th:object="${product}" method="post">
+                                        <input type="hidden" name="id" th:value="${products.id}">
+                                        <button type="submit">Remove from Cart</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
