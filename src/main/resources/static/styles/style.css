@@ -44,3 +44,7 @@ a {
     border: none;
     background-color: #1482e1;
 }
+
+.no-border, .no-border * {
+    border: none;
+}
