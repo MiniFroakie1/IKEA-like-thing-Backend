@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>IKEA</title>
     <link th:href="@{/styles/style.css}" rel="stylesheet">
+    <script th:src="@{/scripts/shop.js}"></script>
 </head>
 <body>
     <div class="center">
@@ -11,9 +12,10 @@
             <h3>Price Calculator</h3>
             <div style="border: white 1px solid">
                 <label>
-                    <select onchange="window.location.href='shop/' + this.value">
-                        <option>Select a Customer</option>
-                        <option th:each="customer:${allcustomerslist}" th:value="*{customer.id}" th:text="*{customer.email}"></option>
+                    <select id="user" onchange="window.location.href= '/shop/' + this.value">
+                        <option value="none" selected>Select a Customer</option>
+                        <option th:value="${user}" id="user-value" disabled hidden></option>
+                        <option th:each="customer:${allcustomerslist}" th:id="*{customer.id}" th:value="*{customer.id}" th:text="*{customer.email}"></option>
                     </select>
                 </label>
                 <div>
@@ -23,29 +25,38 @@
                                 <th>Name</th>
                                 <th>Amount</th>
                                 <th>Price</th>
-                                <th>Action</th>
                             </tr>
                             <tbody>
-                            <tr th:each="products:${allproductslist}">
-                                <td th:text="${products.name}"></td>
-                                <td th:text="${cart.get(products.id)}"></td>
-                                <td th:text="${products.price * cart.get(products.id)} + ' kr'"></td>
-                                <td>
-                                    <form action="#" th:action="@{/shop/addtocart}" th:object="${product}" method="post">
-                                        <input type="hidden" name="id" th:value="${products.id}">
-                                        <button type="submit">Add to Cart</button>
-                                    </form>
-                                    <form action="#" th:action="@{/shop/removefromcart}" th:object="${product}" method="post">
-                                        <input type="hidden" name="id" th:value="${products.id}">
-                                        <button type="submit">Remove from Cart</button>
-                                    </form>
-                                </td>
-                            </tr>
+                                <tr th:each="products:${allproductslist}">
+                                    <td th:text="${products.name}"></td>
+                                    <td >
+                                        <button class="alter-btn" th:onclick="'removeFromCart(' + ${products.id} + ')'">-</button>
+                                        <label>
+                                            <input class="number-input" type="number" name="count" min="0" th:oninput="'setItemCount(' + ${products.id} + ', this.value)'" th:id="'product count ' + ${products.id}">
+                                        </label>
+                                        <button class="alter-btn" th:onclick="'addToCart(' + ${products.id} + ')'">+</button>
+                                    </td>
+                                    <td th:id="'product price ' + ${products.id}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td id="total-count"></td>
+                                    <td id="total-price"></td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        if (localStorage.getItem("cart") == null) {
+            createCart([[${allproductslist}]])
+        }
+        load([[${rebate}]])
+        /*]]*/
+    </script>
 </body>
 </html>

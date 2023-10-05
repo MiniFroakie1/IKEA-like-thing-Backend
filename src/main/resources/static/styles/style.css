@@ -35,3 +35,12 @@ a {
 .btn-danger {
     background-color: #ff2626;
 }
+
+.number-input {
+    width: 40px;
+}
+
+.alter-btn {
+    border: none;
+    background-color: #1482e1;
+}
