@@ -45,7 +45,7 @@ public class ShopController {
 
     @GetMapping("/none")
     public String redirectView() {
-        return "redirect:viewHomePage";
+        return "redirect:";
     }
 
     private float checkRebate(Long id) {
